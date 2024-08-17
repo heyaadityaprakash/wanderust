@@ -1,0 +1,62 @@
+<%layout("layouts/boilerplate")  %>
+<body>
+    <h2>Edit Listing</h2>
+    <br>
+
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="post">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">title</label>
+            <input type="text" value="<%= listing.title %>" class="form-control" name="listing[title]" required>
+            <div class="invalid-feedback">Enter Title</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">description</label>
+            <textarea type="text" class="form-control" name="lisitng[desc]"<%= listing.desc %> required></textarea>
+            <div class="invalid-feedback">Enter description</div>
+        </div>
+       
+        <div class="mb-3">
+            <label for="image" class="form-label">image</label>
+            <input type="image" class="form-control" value="<%= listing.image %>" name="listing[image]" required>
+            <div class="invalid-feedback">Missing image</div>
+        </div>
+
+
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="price" class="form-label">price</label>
+                <input type="number" class="form-control" value="<%= listing.price %>" name="listing[price]" required>
+                <div class="invalid-feedback">Enter Price</div>
+            </div>
+            <div class="mb-3 col-md-8">
+                <label for="location" class="form-label">location</label>
+                <input type="text" class="form-control"<%= listing.location %> name="listing[location]" required>
+                <div class="invalid-feedback">Enter location</div>
+            </div>
+
+        </div>
+
+
+        <div class="mb-3">
+            <label for="country" class="form-label">country</label>
+            <input type="text" class="form-control" value="<%= listing.country %>" name="listing[country]">
+
+
+        </div>
+
+        <button class="btn btn-dark addbtn mt-3">Save</button>
+    </form>
+    
+
+        </div>
+
+        
+    </div>
+
+</body>
+</html>
