@@ -1,0 +1,65 @@
+<% layout('/layouts/boilerplate.ejs') %>
+<body>
+    <h3>Add a new Place</h3>
+    <form action="/listings" method="POST" class="needs-validation" novalidate>
+
+        <div class="row ">
+            <div class="col-8 offset-2">
+
+            <div class="mb-2 form-box" >
+            <label for="title" class="form-label"> title</label>
+            <input class="form-control" type="text" placeholder="enter title" name="listing[title]" required>
+            <div class="invalid-feedback">
+                Title is required.
+            </div>
+            
+        </div>
+        
+        <div class="mb-2 form-box" >
+            <label for="description" class="form-label">description</label>
+            <input type="text" class="form-control" placeholder="enter description" name="listing[description]">
+
+        </div>
+
+        <div class="mb-2 form-box" >
+            <label for="image" class="form-label">image</label>
+            <input type="text" class="form-control" placeholder="enter image url" name="listing[image]">
+
+
+        </div>
+
+
+        <div class="mb-2 form-box" >
+            <label for="price" class="form-label">price</label>
+            <input type="number" class="form-control" placeholder="₹ 999" name="listing[price]" required>
+            <div class="invalid-feedback">
+             Please enter a price.
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+             <div class="mb-2 form-box col-md-6" >
+            <label for="location" class="form-label">location</label>
+            <input type="text" class="form-control" placeholder="enter location" name="listing[location]">
+        </div>
+
+        <div class="mb-2 form-box col-md-6" >
+            <label for="country" class="form-label">country</label>
+            <input type="text" class="form-control" placeholder="enter country" name="listing[country]">
+        </div>
+        </div>
+       
+
+        <button type="submit" class="btn btn-primary">Add </button>
+
+
+            </div>
+        </div>
+       
+    </form>
+
+
+</body>

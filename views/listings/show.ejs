@@ -1,0 +1,79 @@
+<% layout('/layouts/boilerplate.ejs') %>
+
+<body>
+    <h2><%= listings.title %></h2>
+
+    <div class="row list-card p-4">
+
+        <div class="col-md-6 ">
+                      <img src="<%=listings.image%>" class="card-img-top" alt="...">
+
+        </div>
+
+        <div class="col-md-6 card-body ">
+
+            <p><%= listings.description %></p>
+            <b> &#8377; <%= listings.price.toLocaleString("en-IN") %></b>
+            <p><%= listings.location %>  &nbsp; <%= listings.country %></p>
+
+            <div class="row">
+                <div class="col">
+                    <a href="/listings/<%= listings._id %>/edit"><button class="btn btn-secondary">Edit</button> </a>
+                </div>
+                <div class="col">
+                   <form action="/listings/<%= listings._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-primary">Delete</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+
+    <div class="p-4 mb-4">
+        <h3>Leave a Review</h3>
+        <form action="/listings/<%= listings._id %>/reviews" method="POST" novalidate class="needs-validation"> 
+            <div>
+                <label class="fomr-label" for="rating">Review</label>
+                <input class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]">
+            </div>
+            <div>
+                <label class="form-label" for="comemnts">Comment</label>
+                <textarea class="form-control" name="review[comment]" id="comment" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark mt-4">Add Review</button>
+        </form>
+
+        <hr>
+
+        <h3>All Reviews</h3>
+     
+
+        <div class="row p-4">
+                <%for(review of listings.reviews){%>
+                <div class="card  col-md-5 ms-2 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">user</h5>
+                        <p class="card-text"><%=review.comment%></p>
+                        <div class="card-text"><%= review.rating  %> </div>
+
+                        <form action="/listings/<%= listings._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+                             <button class="btn btn-secondary mb-3">delete</button>
+                        </form>
+                       
+    
+                    </div>
+
+                </div>
+                <%}%>
+
+                
+            </div>
+       
+    </div>
+</body>
+<script src="/public/js/script.js"></script>
+

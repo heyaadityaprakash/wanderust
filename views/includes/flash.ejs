@@ -1,0 +1,11 @@
+<!-- sucess exists as a key so we need to check if it is empty or not also -->
+
+<%if(success && success.length){ %>
+   <div class="alert alert-success alert-dismissible fade show " role="alert">
+  <%= success %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<%}%>

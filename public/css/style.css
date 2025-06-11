@@ -1,0 +1,85 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+.navbar{
+    height: 4rem;
+}
+
+.navbar-brand{
+    color: #fe424d;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.f-info{
+    text-decoration: none;
+    color: #222222 ;
+    height: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: aliceblue;
+    align-items: space-evenly;
+    text-align: center;
+
+}
+
+.f-info-link , .f-info-social{
+    width: 100%;
+}
+
+.f-info-social i{
+   padding-top: 1.2rem;
+   font-size: 1.4rem;
+}
+.f-info-link a:hover{
+    color: #fe424d;
+
+}
+.list-card{
+    border: none;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem; 
+    object-fit: cover;
+    height: 20rem;
+}
+.card-body{
+    padding: 0rem;
+}
+.card-img-overlay{
+    opacity: 1;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+}
+
+.btn-primary{
+    background-color: #fe424d;
+    border: none;
+    width: 100%;
+    margin-top: 2rem;
+}
+.btn-secondary{
+    background-color: #222222;
+    border: none;
+    width: 100%;
+    margin-top: 2rem;
+}
