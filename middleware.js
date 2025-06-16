@@ -1,8 +1,21 @@
- const isLoggedIn=(req,res,next)=>{
+ export const isLoggedIn=(req,res,next)=>{    
+    
      if(!req.isAuthenticated()){
+        req.session.redirectUrl=req.originalUrl
         req.flash('error','you must be logged in to create a listing');
         return res.redirect('/login')
     }
     next()
 }
-export default isLoggedIn
+
+//middleware to save redirecrting url
+export const savedUrl=(req,res,next)=>{
+    if(req.session.redirectUrl){
+        res.locals.redirectUrl=req.session.redirectUrl
+    }
+    next()
+}
+
+
+
+

@@ -1,18 +1,31 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Wanderlust</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/listings">Wanderlust</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/listings">Listings</a>
+          <a class="nav-link" href="/listings">Explore</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/listings/new">Add New Listing</a>
+          <a class="nav-link" href="/listings/new">Add</a>
         </li>
-       
+      </ul>
+
+      <!-- ✅ Centered & wider search bar -->
+      <form class="d-flex mx-auto search-bar" role="search">
+        <input class="form-control me-2 search-input" type="search" placeholder="Search Destinations" aria-label="Search" />
+        <button class="btn btn-search" type="submit">
+         <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #fe424d;"></i>
+        </button>
+      </form>
+
+      <!-- Optional: user nav/actions on right -->
+      <ul class="navbar-nav ms-auto">
       </ul>
     </div>
 

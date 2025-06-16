@@ -14,13 +14,20 @@ main().then(()=>{
 })
 .catch((err)=>{
     console.log(err);
-    
+    s
 })
 
 
 const initDB = async () => {
     try {
         await Listing.deleteMany({});
+        // console.log(sampleListings);
+        sampleListings.map((obj) => ({
+         ...obj,
+        owner: '684926922ac1882ebcec2cf3'
+        }));
+        console.log(sampleListings);
+        
         await Listing.insertMany(sampleListings);
         console.log("Inserted data successfully");
     } catch (error) {

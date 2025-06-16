@@ -1,31 +1,82 @@
 <% layout('/layouts/boilerplate.ejs') %> <%= success %>
-<body>
-    <h1>All Listings</h1>
-
-
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-        <% for(let list of allListings){ %>
-            <a href="/listings/<%= list._id %>">
-        <div class="card col" style="width: 18rem;">
-            <img src="<%= list.image %>" class="card-img-top" alt="listing-img">
-            <div class="card-img-overlay"></div>
-        <div class="card-body"> 
-            <b><p class="card-text"><%=list.title%></p></b>
-            <p><%= list.description %></p>
-<b>
-  ₹ <%= (list.price ? list.price.toLocaleString("en-IN") : "N/A") %>
-</b>
+    <div id="filters">
+        <div class="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
         </div>
-        </div>
-    <%}%>
-    </a>
 
+        <div class="filter">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </div>
+
+        <div class="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Iconic Locations</p>
+        </div>
+
+        <div class="filter">
+            <div><i class="fa-solid fa-tractor"></i></div>
+            <p>FarmHouse</p>
+        </div>
+
+        <div class="filter">
+            <div><i class="fa-solid fa-tents"></i></div>
+            <p>Camping</p>
+        </div>
+
+        <div class="filter">
+            <div><i class="fa-solid fa-water-ladder"></i></div>
+            <p>swimming pools</p>
+        </div>
+
+    <!-- switch -->
+
+        <div class="tax-switch">
+        <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" value="" id="checkNativeSwitch" switch>
+        <label class="form-check-label" for="checkNativeSwitch">Incl. Taxes</label>
+        </div>
+     </div>
 
     </div>
 
-   <hr>
-   <form action="/listings/new" method="GET">
-         <button type="submit">Create New Listing</button>
-   </form>
-</body>
-</html>
+
+    <!-- search -->
+
+
+
+    <h1>All Listings</h1>
+
+
+   <div class="container py-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <% for (let list of allListings) { %>
+      <div class="col">
+        <a href="/listings/<%= list._id %>" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm border-0 d-flex flex-column">
+                <img src="<%= list.image.url %>" class="card-img-top mb-2" alt="listing-img">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-1"><%= list.title %></h5>
+                <p class="card-text small text-muted mb-2 flex-grow-1"><%= list.description %></p>
+                <p class="fw-bold  mb-0 mt-auto">₹ <%= (list.price ? list.price.toLocaleString("en-IN") : "N/A") %>/night</p> <i class="tax-info">+ 18% GST</i>
+             </div>
+           </div>
+
+        </a>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<script>
+   let taxSwitch = document.getElementById('checkNativeSwitch');
+
+taxSwitch.addEventListener('click', () => {
+  let taxInfo = document.getElementsByClassName('tax-info');
+  for (let info of taxInfo) {
+    info.classList.toggle('visible-tax');
+  }
+});
+
+</script>

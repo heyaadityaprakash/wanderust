@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate.ejs') %>
 <body>
     <h3>Edit Place</h3>
-    <form method="post" action="/listings/<%= listing._id %>?_method=PUT" class=" needs-validation" novalidate >
+    <form method="post" action="/listings/<%= listing._id %>?_method=PUT" class=" needs-validation" novalidate enctype="multipart/form-data" >
 
         <div class="row">
 
@@ -20,11 +20,14 @@
           </div>
 
 
+          <div>
+            <img  src="<%= orgImg%>" alt="">
+          </div>
+
+
             <div class="mb-2 form-box">
-
-
-                <label for="image" class="form-label">image</label>
-                <input type="text" class="form-control" value="<%= listing.image %>"  name="listing[image]" required>
+                <label for="image" class="form-label">Update Image</label>
+                <input type="file" class="form-control" name="image">
             </div>
 
               <div class="mb-2 form-box">

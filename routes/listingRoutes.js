@@ -1,53 +1,27 @@
 import express from 'express';
 import wrapAsync from '../utils/wrapAsync.js';
-import Listing from '../models/listing.js';
+import { addListing, deleteListing, editListing, index, newListing, showListing, updateListing } from '../controller/listing.js';
+import {isLoggedIn} from '../middleware.js';
+import 'dotenv/config';
+import multer from 'multer';
 
-
-import isLoggedIn from '../middleware.js';
+import { storage } from '../cloudconfig.js';
 const router = express.Router();
 
-router.get('/', wrapAsync(async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render('./listings/index.ejs', { allListings });
-}));
+// set the dest to be storage 
+const upload=multer({storage})
 
-router.get('/new', isLoggedIn,(req, res) => {
-    res.render('./listings/new.ejs');
-});
 
-router.get('/:id', wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const listings = await Listing.findById(id).populate('reviews');
-    res.render('./listings/show.ejs', { listings });
-}));
+router.get('/', wrapAsync(index));
+router.get('/new',newListing);
+router.get('/:id', wrapAsync(showListing));
+router.post('/',upload.single('listing[image]'),isLoggedIn, wrapAsync(addListing));
 
-router.post('/',isLoggedIn,  wrapAsync(async (req, res) => {
-    const newListing = new Listing(req.body.listing);
-    await newListing.save();
-    // flash message
-    req.flash('success','new listing added successfully');
-    res.redirect('/listings');
-}));
 
-router.get('/:id/edit',isLoggedIn, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id);
-    req.flash('success', 'Changes saved !');
-    
-    res.render('./listings/edit.ejs', { listing });
-}));
 
-router.put('/:id',isLoggedIn, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    res.redirect(`/listings/${id}`);
-}));
-
-router.delete('/:id',isLoggedIn, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await Listing.findByIdAndDelete(id);
-    res.redirect('/listings');
-}));
+router.get('/:id/edit',isLoggedIn, wrapAsync(editListing));
+router.put('/:id',isLoggedIn,upload.single('image'), wrapAsync(updateListing));
+router.delete('/:id',isLoggedIn, wrapAsync(deleteListing));
 
 // logout routes
 

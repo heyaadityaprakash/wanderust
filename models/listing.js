@@ -1,13 +1,15 @@
 import mongoose from "mongoose";
 import Reviews from "./reviews.js";
+import User from "./user.js";
 const { Schema } = mongoose;
 
 const listingSchema=new Schema({
     title:{type:String},
     description:String,
-    image:{type:String,
-        default:"https://young.downtoearth.org.in/static/assets/img/Default_Image_Thumbnail.png",
-        set:(val)=> val===""?"https://young.downtoearth.org.in/static/assets/img/Default_Image_Thumbnail.png":val
+    image:{
+        url:String,
+        filename:String
+        
     },
     price:Number,
     location:String,
@@ -17,7 +19,22 @@ const listingSchema=new Schema({
             type:Schema.Types.ObjectId,
             ref:"Reviews"
         }
-    ]
+    ],
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
+    },
+    coordinates: {
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ['Point'], // 'location.type' must be 'Point'
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  }
 })
 
 

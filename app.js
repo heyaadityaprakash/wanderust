@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
+import MongoStore from 'connect-mongo';
+
 import path from 'path';
 import methodoverride from 'method-override';
 import ejsmate from 'ejs-mate';
@@ -17,17 +19,23 @@ import localStrategy from 'passport-local';
 import User from './models/user.js'
 
 
+// remove this while deployment
+import 'dotenv/config';
 
 const app=express()
 app.set('view engine','ejs');
 app.set('views',path.join(path.resolve(), 'views'));
+
 app.use(express.urlencoded({extended:true}));
 app.use(methodoverride("_method"));
 app.engine('ejs', ejsmate);
 app.use(express.static(path.join(path.resolve(), 'public')));
 
 
-const MONGO_URI='mongodb://127.0.0.1:27017/wanderlust';
+
+// const MONGO_URI='mongodb://127.0.0.1:27017/wanderlust';
+const MONGO_URI=process.env.ATLASDB_URL
+
 async function main() {
     await mongoose.connect(MONGO_URI)
     
@@ -48,8 +56,20 @@ app.listen((8000),()=>{
 })
 
 
+
 // sessions
+const store=MongoStore.create({
+    mongoUrl:MONGO_URI,
+    crypto:{
+        secret:'testsecret',
+        
+    },
+    touchAfter:24*60*60*1000
+})
+
+
 const sessionOptions={
+    store:store,
     secret:'testsecret',
     resave:false,
     saveUninitialized:true,
@@ -59,6 +79,8 @@ const sessionOptions={
         httpOnly:true
     }
 }
+
+
 
 app.use(session(sessionOptions))
 app.use(flash())

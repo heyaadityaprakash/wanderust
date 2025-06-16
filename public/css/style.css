@@ -16,6 +16,7 @@ a{
 
 .navbar{
     height: 4rem;
+   
 }
 
 .navbar-brand{
@@ -82,4 +83,49 @@ a{
     border: none;
     width: 100%;
     margin-top: 2rem;
+}
+
+
+
+#filters {
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+  flex-wrap: wrap; 
+  gap: 0.5rem; 
+  padding: 1rem;
+ 
+}
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center;    
+  text-align: center;
+  opacity: 0.6;
+}
+
+.tax-info {
+  display: none;
+  font-size: smaller;
+}
+
+.visible-tax {
+  display: inline;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 500px;
+  border: #fe424d;
+}
+.btn-search {
+  color: white;
+  font-size: 1.1rem;
+  border: none;
 }
